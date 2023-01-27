@@ -2,3 +2,17 @@ spring:
   thymeleaf:
     suffix: .html
     prefix: classpath:/templates/
+
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/minicampus
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: minicampus_user
+    password: a1234
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+

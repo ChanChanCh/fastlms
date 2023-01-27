@@ -1,13 +1,12 @@
 package com.chanproject.fastlms.member;
 
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
-public class MemberController {
+public class MemberController<HttpServletResponse> {
 
     @GetMapping("/member/register")
     public String register(){
@@ -22,7 +21,7 @@ public class MemberController {
 
     @PostMapping("/member/register")
     public String registerSubmit(HttpServletRequest request, HttpServletResponse response
-                                 ,MemberInput parameter){
+                                 , MemberInput parameter){
 
 //        String userId = request.getParameter("userId");
 //        String userName = request.getParameter("userName");
@@ -52,9 +51,6 @@ public class MemberController {
 
         return "member/logout";
     }
-
-
-
 
 
 }
