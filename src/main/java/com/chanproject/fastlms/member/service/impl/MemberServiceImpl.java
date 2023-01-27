@@ -1,19 +1,24 @@
-package com.chanproject.fastlms.member.service;
+package com.chanproject.fastlms.member.service.impl;
 
+import com.chanproject.fastlms.components.MailComponents;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.repository.MemberRepository;
+import com.chanproject.fastlms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private  final MailComponents mailComponents;
+
 
     /**
      * 회원 가입
@@ -28,8 +33,7 @@ public class MemberServiceImpl implements MemberService{
             // 현재 userId에 해당하는 데이터 존재   (아이디값이 존재하다면 저장을 하지않게 하기위함)
             return false;
         }
-
-        memberRepository.findById(parameter.getUserId());
+        String uuid = UUID.randomUUID().toString();
 
         Member member = new Member();
         member.setUserId(parameter.getUserId());
@@ -37,9 +41,16 @@ public class MemberServiceImpl implements MemberService{
         member.setPhone(parameter.getPhone());
         member.setPassword(parameter.getPassword());
         member.setRegDt(LocalDateTime.now());
-
+        member.setEmailAuthYn(false);
+        member.setEmailAuthKey(UUID.randomUUID().toString());
         memberRepository.save(member);
 
-        return false;
+        String email = parameter.getUserId();
+        String subject = "바인홀 사이트 가입을 축하드립니다. ";
+        String text = "<p>바인홀 사이트 가입을 축하드립니다.<p><p> 아래 링크를 클릭하신후 가입을 완료하세요<p>"
+                + "<div><a href='http://localhost:8080/member/email-auth?id="+ uuid + "'> 가입완료 </a></div>";
+        mailComponents.sendMail(email, subject, text);
+
+        return true;
     }
 }
