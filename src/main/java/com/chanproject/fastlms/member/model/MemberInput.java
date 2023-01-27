@@ -1,4 +1,4 @@
-package com.chanproject.fastlms.member;
+package com.chanproject.fastlms.member.model;
 
 
 import lombok.Data;
