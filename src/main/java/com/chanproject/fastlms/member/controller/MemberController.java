@@ -3,27 +3,22 @@ package com.chanproject.fastlms.member.controller;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.repository.MemberRepository;
+import com.chanproject.fastlms.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
-
-
-    private final MemberRepository memberRepository;
-
-   public MemberController(MemberRepository memberRepository){
-       this.memberRepository = memberRepository;
-   }
-
-
-
+    private final MemberService memberService;
 
     @GetMapping("/member/register")
     public String register(){
@@ -37,22 +32,13 @@ public class MemberController {
 //  response server -> web
 
     @PostMapping("/member/register")
-    public String registerSubmit(HttpServletRequest request, HttpServletResponse response
+    public String registerSubmit(Model model, HttpServletRequest request
                                  , MemberInput parameter){
 
-        System.out.println(parameter.toString());
-
-        Member member = new Member();
-        member.setUserId(parameter.getUserId());
-        member.setUserName(parameter.getUserName());
-        member.setPhone(parameter.getPhone());
-        member.setPassword(parameter.getPassword());
-        member.setRegDt(LocalDateTime.now());
-
-        memberRepository.save(member);
+        boolean result = memberService.register(parameter);
+        model.addAttribute("result", result);
 
         return "member/register_complete";
-
     }
 
 
