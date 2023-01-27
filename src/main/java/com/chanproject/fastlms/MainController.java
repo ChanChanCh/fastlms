@@ -20,7 +20,11 @@ public class MainController {
     @RequestMapping("/")
     public String index(){
 
-        mailComponents.sendMailTest();
+        String email = "mn99108@naver.com";
+        String subject = "이메일 테스트로 글써봄";
+        String text = "<p>안녕하세요.</p><p>테스트 해봅니다.</p>";
+
+        mailComponents.sendMail(email, subject, text);
         return "index";
     }
 
