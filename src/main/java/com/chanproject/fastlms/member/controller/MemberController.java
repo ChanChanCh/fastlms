@@ -41,18 +41,16 @@ public class MemberController {
         return "member/register_complete";
     }
 
+    @GetMapping("/member/email-auth")
+    public String emailAuth(Model model, HttpServletRequest request) {
 
-    @RequestMapping("/member/login")
-    public String login(){
+        String uuid = request.getParameter("id");
+        System.out.println(uuid);
 
-        return "member/login";
+        boolean result = memberService.emailAuth(uuid);
+        model.addAttribute("result",result);
+
+        return "member/email_auth";
     }
-
-    @RequestMapping("/member/logout")
-    public String logout(){
-
-        return "member/logout";
-    }
-
 
 }
