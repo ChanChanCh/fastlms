@@ -35,20 +35,21 @@ public class MemberServiceImpl implements MemberService {
         }
         String uuid = UUID.randomUUID().toString();
 
-        Member member = new Member();
-        member.setUserId(parameter.getUserId());
-        member.setUserName(parameter.getUserName());
-        member.setPhone(parameter.getPhone());
-        member.setPassword(parameter.getPassword());
-        member.setRegDt(LocalDateTime.now());
-        member.setEmailAuthYn(false);
-        member.setEmailAuthKey(UUID.randomUUID().toString());
+        Member member = Member.builder()
+                .userId(parameter.getUserId())
+                .userName(parameter.getUserName())
+                .phone(parameter.getPhone())
+                .password(parameter.getPassword())
+                .regDt(LocalDateTime.now())
+                .emailAuthYn(false)
+                .emailAuthKey(uuid)
+                .build();
         memberRepository.save(member);
 
         String email = parameter.getUserId();
         String subject = "바인홀 사이트 가입을 축하드립니다. ";
         String text = "<p>바인홀 사이트 가입을 축하드립니다.<p><p> 아래 링크를 클릭하신후 가입을 완료하세요<p>"
-                + "<div><a href='http://localhost:8080/member/email-auth?id="+ uuid + "'> 가입완료 </a></div>";
+                + "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id="+ uuid + "'> 가입완료 </a></div>";
         mailComponents.sendMail(email, subject, text);
 
         return true;

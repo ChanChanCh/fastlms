@@ -1,11 +1,17 @@
 package com.chanproject.fastlms.member.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data       //getter setter
 @Entity    // 테이블
 public class Member {
     @Id
