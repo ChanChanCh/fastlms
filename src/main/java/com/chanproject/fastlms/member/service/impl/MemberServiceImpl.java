@@ -2,13 +2,22 @@ package com.chanproject.fastlms.member.service.impl;
 
 import com.chanproject.fastlms.components.MailComponents;
 import com.chanproject.fastlms.member.entity.Member;
+import com.chanproject.fastlms.member.exception.MemberNotEmailAuthException;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.repository.MemberRepository;
 import com.chanproject.fastlms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,13 +42,15 @@ public class MemberServiceImpl implements MemberService {
             // 현재 userId에 해당하는 데이터 존재   (아이디값이 존재하다면 저장을 하지않게 하기위함)
             return false;
         }
+
+        String encPassword = BCrypt.hashpw(parameter.getPassword(), BCrypt.gensalt());
         String uuid = UUID.randomUUID().toString();
 
         Member member = Member.builder()
                 .userId(parameter.getUserId())
                 .userName(parameter.getUserName())
                 .phone(parameter.getPhone())
-                .password(parameter.getPassword())
+                .password(encPassword)
                 .regDt(LocalDateTime.now())
                 .emailAuthYn(false)
                 .emailAuthKey(uuid)
@@ -54,7 +65,6 @@ public class MemberServiceImpl implements MemberService {
 
         return true;
     }
-
     @Override
     public boolean emailAuth(String uuid) {
 
@@ -69,5 +79,28 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         return true;
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Optional<Member> optionalMember = memberRepository.findById(username);
+        if(!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        if(!member.isEmailAuthYn()){
+            throw new MemberNotEmailAuthException(" 이메일 인증을 해야 로그인이 가능합니다. ");
+        }
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+
+
+        return new User(member.getUserName(), member.getPassword(), grantedAuthorities);
     }
 }

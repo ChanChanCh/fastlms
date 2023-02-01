@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity    // 테이블
 public class Member {
     @Id
-
     private String userId;
     private String userName;
     private String password;

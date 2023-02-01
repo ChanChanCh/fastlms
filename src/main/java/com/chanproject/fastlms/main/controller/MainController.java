@@ -1,4 +1,4 @@
-package com.chanproject.fastlms;
+package com.chanproject.fastlms.main.controller;
 
 
 
@@ -19,7 +19,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(){
-
+//
 //        String email = "mn99108@naver.com";
 //        String subject = "이메일 테스트로 글써봄";
 //        String text = "<p>안녕하세요.</p><p>테스트 해봅니다.</p>";
