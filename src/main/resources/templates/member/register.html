@@ -6,8 +6,8 @@
     </head>
     <body>
         <h1>회원 가입 페이지</h1>
-
-            <form method="post">
+        <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+        <form method="post">
                                                                         <!--필수값 설정 required -->
                 <div>
                     <input type="email" name="userId" placeholder="아이디(이메일) 입력" required />
