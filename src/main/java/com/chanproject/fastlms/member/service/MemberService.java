@@ -1,5 +1,6 @@
 package com.chanproject.fastlms.member.service;
 
+import com.chanproject.fastlms.admin.dto.MemberDto;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.model.ResetPasswordInput;
@@ -38,7 +39,7 @@ public interface MemberService extends UserDetailsService {
      * 회원 목록 리턴 (관리자에서만 사용 가능)
      */
 
-    List<Member> list();
+    List<MemberDto> list();
 
 
 

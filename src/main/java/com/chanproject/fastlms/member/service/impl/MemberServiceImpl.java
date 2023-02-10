@@ -1,5 +1,7 @@
 package com.chanproject.fastlms.member.service.impl;
 
+import com.chanproject.fastlms.admin.dto.MemberDto;
+import com.chanproject.fastlms.admin.mapper.MemberMapper;
 import com.chanproject.fastlms.components.MailComponents;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.exception.MemberNotEmailAuthException;
@@ -29,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private  final MailComponents mailComponents;
 
+    private  final MemberMapper mamberMapper;
 
     /**
      * 회원 가입
@@ -167,10 +170,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> list() {
+    public List<MemberDto> list() {
 
+        MemberDto parameter = new MemberDto();
+        List<MemberDto> list = mamberMapper.selectList(parameter);
 
-        return memberRepository.findAll();
+        return list;
+
+//        return memberRepository.findAll();
     }
 
     @Override
