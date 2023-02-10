@@ -73,8 +73,13 @@ public class MemberServiceImpl implements MemberService {
         if(!optionalMember.isPresent()){
             return false;
         }
-
         Member member = optionalMember.get();
+
+        // 이미 활성화 시킨 이메일 인증작업을 다시누르면 활성화 되지않도록 만든장치
+        if(member.isEmailAuthYn()) {
+            return false;
+        }
+
         member.setEmailAuthYn(true);
         member.setEmailAuthDt((LocalDateTime.now()));
         memberRepository.save(member);
@@ -98,8 +103,6 @@ public class MemberServiceImpl implements MemberService {
         member.setResetPasswordKey(uuid);
         member.setResetPasswordLimitDt(LocalDateTime.now().plusDays(1));
         memberRepository.save(member);
-
-
 
 
         String email = parameter.getUserId();
@@ -179,6 +182,10 @@ public class MemberServiceImpl implements MemberService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if(member.isAdminYn()){
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
 
 
 

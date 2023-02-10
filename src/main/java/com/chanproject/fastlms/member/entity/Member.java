@@ -29,6 +29,7 @@ public class Member {
     private String resetPasswordKey;
     private  LocalDateTime resetPasswordLimitDt;
 
-
+    //관리자 판단
+    private boolean adminYn;
 
 }
