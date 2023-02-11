@@ -51,5 +51,6 @@ public class MailComponents {
         }
 
         return result;
+
     }
 }

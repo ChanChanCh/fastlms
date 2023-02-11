@@ -22,5 +22,4 @@ public class MemberDto {
 
         boolean adminYn;
 
-
 }
