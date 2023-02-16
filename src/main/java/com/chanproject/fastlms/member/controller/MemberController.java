@@ -81,7 +81,6 @@ public class MemberController {
     public String memberInfo(Model model, HttpServletRequest request) {
 
 
-
         return "member/info";
     }
 

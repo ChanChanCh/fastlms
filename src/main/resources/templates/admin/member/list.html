@@ -13,9 +13,35 @@
             border:solid 1px #000;
         }
 
-        .class-form{
-            padding: 5px 0 10px 0;
+        .list{
+            position: relative;
+            height: 70px;
+        }
+
+        .search-form{
+            padding: 15px 0 10px 0;
             text-align: right;
+
+        }
+
+        .search-form .total-count {
+            position: absolute;
+            display: inline-block;
+            width: 50%;
+            height: 30px;
+            top: 0;
+            left: 0;
+            text-align: left;
+        }
+
+        .pager{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .pager a.on {
+            font-weight: bold;
+            color: red;
         }
     </style>
     <body>
@@ -36,7 +62,8 @@
 
         <div class="list">
 
-            <div class="class-form">
+            <div class="search-form">
+                <p class="total-count"><span th:text="${totalCount}"></span>개</p>
                 <form method="get">
                 <select name="searchType">
                     <option value="all">전체</option>
@@ -77,7 +104,7 @@
                 <tbody>
                     <!--  타임리프 for문으로 컨트롤러에서 보내준 list데이터를 가져옴 -->
                     <tr th:each="x : ${list}">
-                        <td>1</td>
+                        <td th:text="${x.seq}">1</td>
                         <td th:text="${x.userId}">mn99108@naver.com</td>
                         <td th:text="${x.userName}">chan</td>
                         <td th:text="${x.phone}">010-1111-2222</td>
@@ -98,6 +125,11 @@
                 </tbody>
 
             </table>
+
+            <div class="pager" th:utext="${pager}">
+
+            </div>
+
 
             </div>
 

@@ -6,7 +6,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
-
 import javax.mail.internet.MimeMessage;
 
 @RequiredArgsConstructor
@@ -23,7 +22,6 @@ public class MailComponents {
         msg.setText(" 안녕하세요. 바인홀입니다 반갑습니다 ");
 
         javaMailSender.send(msg);
-
 
     }
 
@@ -54,3 +52,5 @@ public class MailComponents {
 
     }
 }
+
+

@@ -4,6 +4,43 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chanproject.fastlms.admin.mapper.MemberMapper">
 
+
+
+    <select id="selectListCount"
+            parameterType="com.chanproject.fastlms.admin.model.MemberParam"
+            resultType="long">
+
+        select count(*)
+        from member
+        where 1 = 1
+
+        <if test="searchType != null and searchValue != null">
+            <choose>
+                <when test="searchType == 'userId'">
+                    and user_id like concat('%', #{searchValue}, '%')
+                </when>
+                <when test="searchType == 'userName'">
+                    and user_name like concat('%', #{searchValue}, '%')
+                </when>
+                <when test="searchType == 'phone'">
+                    and phone like concat('%', #{searchValue}, '%')
+                </when>
+                <otherwise>
+                    and(
+                    user_id like concat('%', #{searchValue}, '%')
+                    or
+                    user_name like concat('%', #{searchValue}, '%')
+                    or
+                    phone like concat('%', #{searchValue}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+
+    </select>
+
+
+
         <!--   Mapper의 함수 (id로 맵핑시켜준 상태)    -->
     <select id="selectList"
             parameterType="com.chanproject.fastlms.admin.model.MemberParam"
@@ -37,7 +74,7 @@
             </if>
 
         <!-- 데이터불러오는 갯수의 제한 -->
-        limit 0, 10
+        limit #{pageStart}, #{pageEnd}
 
     </select>
 </mapper>
