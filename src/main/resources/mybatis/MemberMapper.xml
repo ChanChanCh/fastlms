@@ -5,7 +5,6 @@
 <mapper namespace="com.chanproject.fastlms.admin.mapper.MemberMapper">
 
 
-
     <select id="selectListCount"
             parameterType="com.chanproject.fastlms.admin.model.MemberParam"
             resultType="long">
@@ -38,8 +37,6 @@
         </if>
 
     </select>
-
-
 
         <!--   Mapper의 함수 (id로 맵핑시켜준 상태)    -->
     <select id="selectList"

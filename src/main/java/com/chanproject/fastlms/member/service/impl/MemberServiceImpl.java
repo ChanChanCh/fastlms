@@ -32,7 +32,6 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private  final MailComponents mailComponents;
-
     private  final MemberMapper memberMapper;
 
 
@@ -193,6 +192,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberDto detail(String userId) {
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+
+        if(!optionalMember.isPresent()){
+            return null;
+        }
+
+        Member member = optionalMember.get();
+
+        return MemberDto.of(member);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Optional<Member> optionalMember = memberRepository.findById(username);
@@ -212,8 +225,6 @@ public class MemberServiceImpl implements MemberService {
         if(member.isAdminYn()){
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-
-
 
         return new User(member.getUserName(), member.getPassword(), grantedAuthorities);
     }
