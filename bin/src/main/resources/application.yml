@@ -1,0 +1,38 @@
+spring:
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/minicampus
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: minicampus_user
+    password: a1234
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: chan.1118.0919@gmail.com
+    password: ybofyyujezzeolys
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+logging:
+  level:
+    root: info
+mybatis:
+  mapper-locations: mybatis/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+

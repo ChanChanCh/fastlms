@@ -1,7 +1,8 @@
-package com.chanproject.fastlms.admin;
+package com.chanproject.fastlms.admin.controller;
 
 import com.chanproject.fastlms.admin.dto.MemberDto;
 import com.chanproject.fastlms.admin.model.MemberParam;
+import com.chanproject.fastlms.admin.model.MemberStatusInput;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.repository.MemberRepository;
 import com.chanproject.fastlms.member.service.MemberService;
@@ -11,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +60,14 @@ public class AdminMemberController {
 
         return "admin/member/detail";
 
+    }
+
+    @PostMapping("/admin/member/status.do")
+    public String status(Model model, MemberStatusInput parameter){
+
+        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getUserStatus());
+
+        return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
     }
 
 }

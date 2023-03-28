@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원 가입 완료</title>
+    </head>
+    <body>
+        <!-- 타임리프 문법 -->
+        <div th:if="${result}">
+            <h1>회원 가입 완료</h1>
+            <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+            <p>회원 가입이 완료되었습니당!</p>
+            <a href="/">홈으로 돌아가기</a>
+        </div>
+
+        <div th:if="${result eq false}">
+            <h1>회원 가입 실패</h1>
+            <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+            <p>회원 가입에 실패하였습니다</p>
+        </div>
+
+        <div th:text="${result}">
+
+        </div>
+
+    </body>
+</html>

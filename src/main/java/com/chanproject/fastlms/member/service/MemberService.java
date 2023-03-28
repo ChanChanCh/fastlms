@@ -48,4 +48,8 @@ public interface MemberService extends UserDetailsService {
     MemberDto detail(String userId);
 
 
+    /**
+     *  회원 상태 변경
+     */
+    boolean updateStatus(String userId, String userStatus);
 }
