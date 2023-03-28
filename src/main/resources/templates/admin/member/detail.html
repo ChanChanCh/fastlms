@@ -92,6 +92,19 @@
                         </div>
                     </td>
                 </tr>
+
+                <tr>
+                    <th>비밀번호 초기화</th>
+                    <td>
+                        <div>
+                            <form method="post" action="/admin/member/password.do">
+                                <input th:value="${member.userId}" type="hidden" name="userId"/>
+                                <input  type="text" name="password"/>
+                                <button type="submit">비밀번호 초기화</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         
