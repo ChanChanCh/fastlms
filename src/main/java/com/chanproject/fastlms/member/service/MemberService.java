@@ -2,7 +2,6 @@ package com.chanproject.fastlms.member.service;
 
 import com.chanproject.fastlms.admin.dto.MemberDto;
 import com.chanproject.fastlms.admin.model.MemberParam;
-import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.model.ResetPasswordInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,12 +42,10 @@ public interface MemberService extends UserDetailsService {
     List<MemberDto> list(MemberParam parameter);
 
     /**
-     *  회원 상세 정보
+     * 회원 상세 정보
      */
 
     MemberDto detail(String userId);
-
-
 
 
 }

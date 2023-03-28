@@ -195,7 +195,6 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto detail(String userId) {
 
         Optional<Member> optionalMember = memberRepository.findById(userId);
-
         if(!optionalMember.isPresent()){
             return null;
         }
