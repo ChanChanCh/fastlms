@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data       //getter setter
 @Entity    // 테이블
-public class Member {
+public class Member implements MemberCode {
     @Id
     private String userId;
 
@@ -32,4 +32,5 @@ public class Member {
     //관리자 판단
     private boolean adminYn;
 
+    private String userStatus; // 이용가능과 정지상태 구분
 }

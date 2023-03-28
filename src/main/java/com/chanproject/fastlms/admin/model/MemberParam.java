@@ -2,6 +2,8 @@ package com.chanproject.fastlms.admin.model;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+
 @Data
 public class MemberParam {
 
@@ -10,6 +12,8 @@ public class MemberParam {
 
     String searchType;
     String searchValue;
+
+    String userId;
 
 
     /*
@@ -40,6 +44,25 @@ public class MemberParam {
 
     }
 
+    public String getQueryString(){
 
+        init();
+
+        StringBuilder sb = new StringBuilder();
+
+        if(searchType != null && searchType.length() > 0) {
+            sb.append(String.format("searchType=%s", searchType));
+        }
+
+        if(searchType != null && searchType.length() > 0) {
+           if(sb.length() > 0){
+               sb.append("&");
+           }
+           sb.append(String.format("searchValue=%s", searchValue));
+        }
+
+        return sb.toString();
+
+    }
 
 }

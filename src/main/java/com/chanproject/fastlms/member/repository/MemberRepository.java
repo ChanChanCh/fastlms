@@ -13,5 +13,4 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     Optional<Member> findByResetPasswordKey(String resetPasswordkey);
 
 
-
 }

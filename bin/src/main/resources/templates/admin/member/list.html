@@ -105,14 +105,7 @@
                     <!--  타임리프 for문으로 컨트롤러에서 보내준 list데이터를 가져옴 -->
                     <tr th:each="x : ${list}">
                         <td th:text="${x.seq}">1</td>
-                        <td >
-
-                            <a th:text="${x.userId}"
-                               th:href="${'detail.do?userId=' + x.userId}">
-                                mn99108@naver.com</a>
-
-
-                        </td>
+                        <td th:text="${x.userId}">mn99108@naver.com</td>
                         <td th:text="${x.userName}">chan</td>
                         <td th:text="${x.phone}">010-1111-2222</td>
                         <td>
