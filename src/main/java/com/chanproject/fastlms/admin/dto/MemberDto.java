@@ -26,4 +26,6 @@ public class MemberDto {
         long totalCount;
         long seq;
 
+
+
 }
