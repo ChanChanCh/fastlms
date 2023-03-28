@@ -1,0 +1,44 @@
+# 컨벤션
+
+ Commit message
+
+- **feat :기능 추가
+- **fix :에러 해결
+- **docs :문서 수정(리드미, ignore, txt)
+- **style :코드와 관련 없는 코드 포맷팅 변경
+- **refactor :리팩토링
+- **test :테스트 코드
+- **chore :Updating build tasks, package manager configs, etc; no production code change
+- **layout :스타일 코드 작성 및 수정
+
+Code convention
+
+1. 참고자료 1 >> [https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
+2. 참고자료 2 >> [https://055055.tistory.com/97](https://055055.tistory.com/97)
+
+Branch
+
+개인 브랜치 사용해서 개발 진행 (branch → main)
+
+ 예시 )
+
+main(최종)
+
+        └── develop
+
+                └── feture
+                            ├── feature/이름:
+                            └── feature/이름:
+
+**브랜치명 : feature / { 본인 이름  }**
+
+**Code**
+
+- **네이밍 규칙**
+    - 변수, 함수명: camelCase
+    - 컴포넌트 파일명: PascalCase
+    - 일반 파일명: kebab-case
+    - 클래스명: PascalCase
+    - 상수명: UPPERCASE_SNAKE_CASE
+    - 컴포넌트 폴더명: PascalCase
+    - 일반 폴더명: snake_case
