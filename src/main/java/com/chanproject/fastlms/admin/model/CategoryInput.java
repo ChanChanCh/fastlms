@@ -7,5 +7,7 @@ public class CategoryInput {
 
     long id;
     String categoryName;
+    int sortValue;
+    boolean usingYn;
 
 }
