@@ -1,9 +1,10 @@
-package com.chanproject.fastlms.admin.service;
+package com.chanproject.fastlms.admin.service.impl;
 
 
 import com.chanproject.fastlms.admin.dto.CategoryDto;
 import com.chanproject.fastlms.admin.entity.Category;
 import com.chanproject.fastlms.admin.repository.CategoryRepository;
+import com.chanproject.fastlms.admin.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
@@ -47,6 +48,9 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public boolean del(long id) {
-        return false;
+
+        categoryRepository.deleteById(id);
+
+        return true;
     }
 }

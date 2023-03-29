@@ -11,7 +11,30 @@
             .list table th, .list table td{
                 border:solid 1px #000;
             }
+
+            p.nothing{
+                text-align: center;
+                padding: 100px;
+            }
         </style>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+        <script>
+
+            $(document).ready(function() {
+
+                $('form[name=deleteForm]').on('submit', function(){
+
+                    if(!confirm(' 카테고리를 삭제하시겠습니까? ')) {
+                        return false;
+                    }
+
+
+                });
+            });
+        </script>
+
     </head>
     <body>
             <h1>카테고리 관리</h1>
@@ -24,6 +47,7 @@
                     <input type="text" name="categoryName" required placeholder="카테고리명 입력"/>
                     <button type="submit">추가</button>
                 </form>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -37,18 +61,32 @@
                         <th>
                             사용여부
                         </th>
+                        <th>
+                            비고
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:each="x : ${list}">
-                    <td th:text="${x.id}">1</td>
+                    <tr th:each="x : ${list}">
+                        <td th:text="${x.id}">1</td>
 
-                    <td th:text="${x.categoryName}">chan</td>
-                    <td th:text="${x.sortValue}">010-1111-2222</td>
-                    <td>
-                        <p th:text="${x.usingYn}">2021.01.01</p>
-                    </td>
-                </tr>
+                        <td th:text="${x.categoryName}">chan</td>
+                        <td th:text="${x.sortValue}">010-1111-2222</td>
+                        <td>
+                            <p th:text="${x.usingYn}">2021.01.01</p>
+                        </td>
+                        <td>
+                            <form name="deleteForm" method="post" action="/admin/category/delete.do">
+                                <input type="hidden" name="id" th:value="${x.id}"/>
+                                <button type="submit">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.size(list) < 1}">
+                        <td colspan="5">
+                            <p class="nothing">내용이 없습니다.</p>
+                        </td>
+                    </tr>
 
                 </tbody>
             </table>

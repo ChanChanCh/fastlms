@@ -10,6 +10,7 @@ import com.chanproject.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,6 +37,15 @@ public class AdminCategoryController {
     public String add(Model model, CategoryInput parameter){
 
        boolean result = categoryService.add(parameter.getCategoryName());
+
+        return "redirect:/admin/category/list.do";
+
+    }
+
+    @PostMapping("/admin/category/delete.do")
+    public String del(Model model, CategoryInput parameter){
+
+        boolean result = categoryService.del(parameter.getId());
 
         return "redirect:/admin/category/list.do";
 
