@@ -44,16 +44,26 @@
         <div class="detail">
 
             <form method="post" >
-
         
             <table>
                 <tbody>
+                <tr>
+                    <th>강좌 카테고리</th>
+                    <td>
+                        <select name="categoryId" required>
+                            <option value="">카테고리 선택</option>
+                            <option
+                                    th:selected=""
+                                    th:each="x : ${category}" th:value="${x.id}" th:text="${x.categoryName}">파이썬</option>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <th>
                         강좌명:
                     </th>
                     <td>
-                        <input type="text" name="subject" required placeholder="강좌명 입력" />
+                        <input th:value="${detail.subject}" type="text" name="subject" required placeholder="강좌명 입력" />
                     </td>
                 </tr>
 
@@ -61,7 +71,8 @@
             </table>
 
             <div class="buttons">
-                <button type="submit"> 강좌 등록 하기</button>
+                <button th:if="${editMode}" type="submit"> 강좌 수정 하기</button>
+                <button th:if="${!editMode}" type="submit"> 강좌 등록 하기</button>
                 <a href="/admin/course/list.do"> 목록 이동 </a>
             </div>
 

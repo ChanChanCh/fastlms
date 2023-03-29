@@ -6,9 +6,10 @@ import lombok.Data;
 @Data
 public class CourseInput {
 
-    Long id;
-
-    String imagePath;
-    String keyword;
+    long id;
+    long categoryId;
     String subject;
+//    String imagePath;
+//    String keyword;
+
 }
