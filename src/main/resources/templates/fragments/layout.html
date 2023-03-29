@@ -15,10 +15,26 @@
             <a href="/member/login">로그인</a>
 
             <a href="/member/logout">로그아웃</a>
-
         </div>
         <hr/>
     </div>
+
+    <div th:fragment="fragment-admin-body-menu">
+        <a href="/admin/main.do">관리자 메인</a>
+        |
+        <a href="/admin/member/list.do"> 회원 관리 </a>
+        |
+        <a href="/admin/category/list.do"> 카테고리 관리 </a>
+        |
+        <a href="#"> 강의 관리 </a>
+        |
+        <a href="/member/logout"> 로그아웃 </a>
+        <br/>
+        <hr>
+    </div>
+
+
+
 
 </body>
 </html>
