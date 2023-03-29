@@ -53,7 +53,7 @@
                         <select name="categoryId" required>
                             <option value="">카테고리 선택</option>
                             <option
-                                    th:selected=""
+                                    th:selected="${detail.categoryId == x.id}"
                                     th:each="x : ${category}" th:value="${x.id}" th:text="${x.categoryName}">파이썬</option>
                         </select>
                     </td>
