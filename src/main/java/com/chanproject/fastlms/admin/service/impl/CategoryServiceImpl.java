@@ -3,6 +3,7 @@ package com.chanproject.fastlms.admin.service.impl;
 
 import com.chanproject.fastlms.admin.dto.CategoryDto;
 import com.chanproject.fastlms.admin.entity.Category;
+import com.chanproject.fastlms.admin.mapper.CategoryMapper;
 import com.chanproject.fastlms.admin.model.CategoryInput;
 import com.chanproject.fastlms.admin.repository.CategoryRepository;
 import com.chanproject.fastlms.admin.service.CategoryService;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     private Sort getSortBySortValueDesc(){
             return Sort.by(Sort.Direction.DESC, "sortValue");
@@ -67,5 +69,12 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(id);
 
         return true;
+    }
+
+    @Override
+    public List<CategoryDto> frontList(CategoryDto parameter) {
+
+       return categoryMapper.select(parameter);
+
     }
 }
