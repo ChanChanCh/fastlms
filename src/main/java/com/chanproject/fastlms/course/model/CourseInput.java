@@ -16,6 +16,8 @@ public class CourseInput {
     long salePrice;
     String saleEndDtText;
 
+    // 삭제
+    String idList;
 
 
 

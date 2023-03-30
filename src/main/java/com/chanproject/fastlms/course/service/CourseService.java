@@ -33,4 +33,8 @@ public interface CourseService {
     CourseDto getById(long id);
 
 
+    /**
+     * 강좌내용 삭제
+     */
+    boolean del(String idList);
 }
