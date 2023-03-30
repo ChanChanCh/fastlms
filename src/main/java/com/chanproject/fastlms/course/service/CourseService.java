@@ -44,6 +44,8 @@ public interface CourseService {
     List<CourseDto> frontList(CourseParam parameter);
 
 
-
-
+    /**
+     *  프론트 강좌 상세 정보
+     */
+    CourseDto frontDetail(long id);
 }
