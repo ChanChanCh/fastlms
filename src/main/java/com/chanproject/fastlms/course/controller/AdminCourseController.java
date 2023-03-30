@@ -93,7 +93,7 @@ public class AdminCourseController extends BaseController{
         }
 
 
-        return "redirect:/admin/course/add.do";
+        return "redirect:/admin/course/list.do";
     }
 
     @PostMapping( "/admin/course/delete.do")
