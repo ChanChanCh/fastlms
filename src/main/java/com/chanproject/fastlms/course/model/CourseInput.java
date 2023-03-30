@@ -9,7 +9,14 @@ public class CourseInput {
     long id;
     long categoryId;
     String subject;
-//    String imagePath;
-//    String keyword;
+    String keyword;
+    String summary;
+    String contents;
+    long price;
+    long salePrice;
+    String saleEndDtText;
+
+
+
 
 }
