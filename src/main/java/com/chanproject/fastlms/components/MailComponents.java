@@ -18,8 +18,8 @@ public class MailComponents {
         SimpleMailMessage msg = new SimpleMailMessage();
 
         msg.setTo("chan.1118.0919@gmail.com");
-        msg.setSubject("안녕하세요. 바인홀 입니다.");
-        msg.setText(" 안녕하세요. 바인홀입니다 반갑습니다 ");
+        msg.setSubject("회원가입 인증 메일입니다.");
+        msg.setText(" 회원가입 인증메일입니다");
 
         javaMailSender.send(msg);
 

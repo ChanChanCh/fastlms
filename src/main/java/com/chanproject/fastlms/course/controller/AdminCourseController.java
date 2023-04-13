@@ -27,7 +27,6 @@ public class AdminCourseController extends BaseController{
     @GetMapping("/admin/course/list.do")
     public String list(Model model, CourseParam parameter){
 
-
         parameter.init();
 
         List<CourseDto> courseList = courseService.list(parameter);
@@ -101,7 +100,6 @@ public class AdminCourseController extends BaseController{
             , CourseInput parameter){
 
         boolean result = courseService.del(parameter.getIdList());
-
 
         return "redirect:/admin/course/list.do";
     }

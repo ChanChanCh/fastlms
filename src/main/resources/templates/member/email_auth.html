@@ -9,7 +9,10 @@
         <h1>회원 활성화~!!</h1>
 
         <div th:if="${result eq true }">
-            <p>회원님의 계정이 활성화 되었습니다 예매하시겠습니까?</p>
+            <p>회원님의 계정이 활성화 되었습니다 </p>
+        </div>
+        <div>
+            <a href="/">메인으로 이동</a>
         </div>
 
         <div th:if="${result eq false}">

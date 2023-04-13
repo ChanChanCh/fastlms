@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chanproject.fastlms.course.mapper.TakeCourseMapper">
+
+    <sql id="selectListWhere">
+
+    </sql>
+
+    <select id="selectListCount" resultType="long">
+
+        select count(*)
+        from take_course
+        where 1 = 1
+            <include refid="selectListWhere"/>
+
+    </select>
+
+        <!--   Mapper의 함수 (id로 맵핑시켜준 상태)    -->
+    <select id="selectList" resultType="com.chanproject.fastlms.course.dto.TakeCourseDto">
+
+        select tc.*
+            , c.subject
+            , m.user_id
+            , m.phone
+        from take_course tc
+            join course c on tc.course_id = c.id
+            join member m on tc.user_id = m.user_name
+        where 1 = 1
+            <include refid="selectListWhere"/>
+        order by reg_dt desc
+        limit #{pageStart}, #{pageEnd}
+    </select>
+
+
+</mapper>
