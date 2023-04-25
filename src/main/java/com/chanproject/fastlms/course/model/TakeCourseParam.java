@@ -8,4 +8,7 @@ public class TakeCourseParam extends CommonParam {
 
     long id; // course.id
     long categoryId;
+    String status;
+
+
 }

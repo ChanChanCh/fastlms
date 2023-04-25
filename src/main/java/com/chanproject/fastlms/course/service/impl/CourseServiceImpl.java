@@ -12,6 +12,7 @@ import com.chanproject.fastlms.course.model.TakeCourseInput;
 import com.chanproject.fastlms.course.repository.CourseRepository;
 import com.chanproject.fastlms.course.repository.TakeCourseRepository;
 import com.chanproject.fastlms.course.service.CourseService;
+import com.chanproject.fastlms.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

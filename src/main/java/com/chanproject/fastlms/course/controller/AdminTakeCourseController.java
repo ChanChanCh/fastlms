@@ -3,6 +3,7 @@ package com.chanproject.fastlms.course.controller;
 import com.chanproject.fastlms.admin.service.CategoryService;
 import com.chanproject.fastlms.course.dto.CourseDto;
 import com.chanproject.fastlms.course.dto.TakeCourseDto;
+import com.chanproject.fastlms.course.model.ServiceResult;
 import com.chanproject.fastlms.course.model.TakeCourseParam;
 import com.chanproject.fastlms.course.service.TakeCourseService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -43,5 +45,16 @@ public class AdminTakeCourseController extends BaseController{
         return "admin/takecourse/list";
     }
 
+    @PostMapping("/admin/takecourse/status.do")
+    public String status(Model model, TakeCourseParam parameter){
+
+            ServiceResult result = takeCourseService.updateStatus(parameter.getId(), parameter.getStatus());
+            if(!result.isResult()){
+                model.addAttribute("message", result.getMessage());
+                return "common/error";
+            }
+
+        return "redirect:/admin/takecourse/list.do";
+    }
 
 }
