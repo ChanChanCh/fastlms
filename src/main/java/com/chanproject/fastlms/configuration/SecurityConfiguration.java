@@ -34,6 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
+        // Spring Security에서 X-Frame-Options 응답헤더 설정
+        http.headers().frameOptions().sameOrigin();
 
         //로그인 하지 않아도 보여지는 영역 설정
         http.authorizeRequests()

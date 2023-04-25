@@ -9,11 +9,13 @@
     <div th:fragment="fragment-body-menu">
         <div>
             <a href="/member/register">회원가입</a>
-
+            |
             <a href="/member/info">회원 정보</a>
-
+            |
+            <a href="/course">강좌 목록</a>
+            |
             <a href="/member/login">로그인</a>
-
+            |
             <a href="/member/logout">로그아웃</a>
         </div>
         <hr/>
@@ -26,7 +28,9 @@
         |
         <a href="/admin/category/list.do"> 카테고리 관리 </a>
         |
-        <a href="#"> 강의 관리 </a>
+        <a href="/admin/course/list.do"> 강좌 관리 </a>
+        |
+        <a href="/admin/takecourse/list.do"> 수강 관리 </a>
         |
         <a href="/member/logout"> 로그아웃 </a>
         <br/>

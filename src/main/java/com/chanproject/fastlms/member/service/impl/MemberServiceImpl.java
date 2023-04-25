@@ -66,8 +66,8 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         String email = parameter.getUserId();
-        String subject = "바인홀 사이트 가입을 축하드립니다. ";
-        String text = "<p>바인홀 사이트 가입을 축하드립니다.<p><p> 아래 링크를 클릭하신후 가입을 완료하세요<p>"
+        String subject = "가입확인 인증메일입니다. ";
+        String text = "<p>가입확인 인증메일입니다.<p><p> 아래 링크를 클릭하신후 가입을 완료하세요<p>"
                 + "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id="+ uuid + "'> 가입완료 </a></div>";
         mailComponents.sendMail(email, subject, text);
 
@@ -118,8 +118,8 @@ public class MemberServiceImpl implements MemberService {
 
 
         String email = parameter.getUserId();
-        String subject = "[바인홀] 비밀번호 초기화 메일입니다. ";
-        String text = "<p>바인홀 비밀번호 초기화 메일입니다 <p>" +
+        String subject = "[관리자] 비밀번호 초기화 메일입니다. ";
+        String text = "<p> 비밀번호 초기화 메일입니다 <p>" +
                 "<p> 아래 링크를 클릭하신후 비밀번호를 초기화 해주세요.<p>" +
                 "<div><a target='_blank' href='http://localhost:8080/member/reset/password?id="+ uuid + "'> 비밀번호 초기화 링크 </a></div>";
         mailComponents.sendMail(email, subject, text);
@@ -247,9 +247,9 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        Optional<Member> optionalMember = memberRepository.findById(username);
+        Optional<Member> optionalMember = memberRepository.findById(userId);
         if(!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
@@ -271,6 +271,6 @@ public class MemberServiceImpl implements MemberService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-        return new User(member.getUserName(), member.getPassword(), grantedAuthorities);
+        return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }
 }
