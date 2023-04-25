@@ -5,7 +5,6 @@
 <mapper namespace="com.chanproject.fastlms.course.mapper.TakeCourseMapper">
 
     <sql id="selectListWhere">
-
     </sql>
 
     <select id="selectListCount" resultType="long">
@@ -22,11 +21,11 @@
 
         select tc.*
             , c.subject
-            , m.user_id
+            , m.user_name
             , m.phone
         from take_course tc
             join course c on tc.course_id = c.id
-            join member m on tc.user_id = m.user_name
+            join member m on tc.user_id = m.user_id
         where 1 = 1
             <include refid="selectListWhere"/>
         order by reg_dt desc

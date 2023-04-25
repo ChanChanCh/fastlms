@@ -247,9 +247,9 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        Optional<Member> optionalMember = memberRepository.findById(username);
+        Optional<Member> optionalMember = memberRepository.findById(userId);
         if(!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
@@ -271,6 +271,6 @@ public class MemberServiceImpl implements MemberService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-        return new User(member.getUserName(), member.getPassword(), grantedAuthorities);
+        return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }
 }
