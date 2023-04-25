@@ -21,6 +21,9 @@ public class CategoryDto {
     int sortValue;
     boolean usingYn;
 
+    //ADD COLUMNS
+    int courseCount;
+
     public static List<CategoryDto> of (List<Category> categories){
 
         if(categories != null) {

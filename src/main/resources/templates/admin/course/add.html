@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>관리자 화면</title>
+        <style>
+            .detail table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .detail table th, .detail table td{
+                border:solid 1px #000;
+            }
+
+            .buttons{
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .buttons a, .buttons button {
+                border-width: 0;
+                background-color: transparent;
+                text-decoration: underline;
+                font-size: 12px;
+                line-height: 20px;
+                height: 20px;
+                color: #000;
+                cursor: pointer;
+            }
+
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+
+                $('#submitForm').on('submit', function() {
+                    // 에디터의 내용이 textarea에 적용된다.
+                    oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+            <h1>강좌 관리 - 강좌 등록</h1>
+            <div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+
+        <div class="detail">
+
+            <form id="submitForm" method="post" >
+        
+            <table>
+                <tbody>
+                <tr>
+                    <th>강좌 카테고리</th>
+                    <td>
+                        <select name="categoryId" required>
+                            <option value="">카테고리 선택</option>
+                            <option
+                                    th:selected="${detail.categoryId == x.id}"
+                                    th:each="x : ${category}" th:value="${x.id}" th:text="${x.categoryName}">파이썬</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        강좌명:
+                    </th>
+                    <td>
+                        <input th:value="${detail.subject}" type="text" name="subject" required placeholder="강좌명 입력" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        키워드
+                    </th>
+                    <td>
+                        <input th:value="${detail.keyword}" type="text" name="keyword" required placeholder="키워드 입력" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        요약문구
+                    </th>
+                    <td>
+                        <textarea th:text="${detail.summary}" name="summary" required placeholder="요약 문구 입력" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        내용
+                    </th>
+                    <td>
+                        <textarea th:text="${detail.contents}" id="contents" name="contents" placeholder="내용 입력" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        정가
+                    </th>
+                    <td>
+                        <input th:value="${detail.price}" type="text" name="price" required placeholder="정가 입력" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        판매가
+                    </th>
+                    <td>
+                        <input th:value="${detail.salePrice}" type="text" name="salePrice" required placeholder="판매가 입력" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>
+                        할인 종료일
+                    </th>
+                    <td>
+                        <input th:value="${detail.saleEndDt}" type="text" name="saleEndDtText" required placeholder="할인 종료일 입력" />
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <div class="buttons">
+                <button th:if="${editMode}" type="submit"> 강좌 수정 하기</button>
+                <button th:if="${!editMode}" type="submit"> 강좌 등록 하기</button>
+                <a href="/admin/course/list.do"> 목록 이동 </a>
+            </div>
+
+            </form>
+        </div>
+
+
+            <script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+
+            <script type="text/javascript">
+                var oEditors = [];
+                nhn.husky.EZCreator.createInIFrame({
+                    oAppRef: oEditors,
+                    elPlaceHolder: "contents",
+                    sSkinURI: "/res/se2/SmartEditor2Skin.html",
+                    fCreator: "createSEditor2"
+                });
+            </script>
+
+    </body>
+</html>
