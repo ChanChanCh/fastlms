@@ -4,6 +4,7 @@ import com.chanproject.fastlms.admin.dto.MemberDto;
 import com.chanproject.fastlms.admin.mapper.MemberMapper;
 import com.chanproject.fastlms.admin.model.MemberParam;
 import com.chanproject.fastlms.components.MailComponents;
+import com.chanproject.fastlms.course.model.ServiceResult;
 import com.chanproject.fastlms.member.entity.Member;
 import com.chanproject.fastlms.member.exception.MemberNotEmailAuthException;
 import com.chanproject.fastlms.member.exception.MemberStopUserException;
@@ -243,6 +244,29 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         return true;
+    }
+
+    @Override
+    public ServiceResult updateMemberPassword(MemberInput parameter) {
+
+        String userId = parameter.getUserId();
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if(!optionalMember.isPresent()) {
+            return new ServiceResult(false,"회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        if (!BCrypt.checkpw(parameter.getPassword(), member.getPassword())){
+            return new ServiceResult(false,"비밀번호가 일치하지 않습니다.");
+        }
+
+        String encPassword = BCrypt.hashpw(parameter.getNewPassword(), BCrypt.gensalt());
+        member.setPassword(encPassword);
+        memberRepository.save(member);
+
+        return new ServiceResult(true);
     }
 
 
