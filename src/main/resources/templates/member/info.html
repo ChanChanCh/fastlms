@@ -3,6 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <title>회원 정보</title>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <script>
+
+            $(function(){
+
+                $('#submitForm').on('submit', function() {
+
+                    if (!confirm('회원 정보를 수정하시겠습니까?')){
+                        return false;
+                    }
+
+                });
+            });
+        </script>
+
+
     </head>
     <body>
             <h1>회원정보</h1>
@@ -19,8 +37,49 @@
                 <hr/>
             </div>
 
-            <div th:text="${detail}">
-                
+            <div>
+                <form id="updateForm" method="post">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>아이디(이메일)</th>
+                        <td>
+                            <p th:text="${detail.userId}">아이디</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td>
+                            <p th:text="${detail.userName}">이름</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>전화번호</th>
+                        <td>
+                            <input name="phone" type="text" th:value="${detail.phone}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>가입일</th>
+                        <td>
+                            <p th:text="${detail.regDtText}">가입일</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>회원정보 수정일</th>
+                        <td>
+                            <p th:text="${detail.udtDtText}">가입일</p>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <div>
+                    <button type="submit">수정</button>
+                </div>
+
+                </form>
             </div>
 
 

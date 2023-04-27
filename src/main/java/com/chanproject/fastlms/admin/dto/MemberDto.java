@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,9 @@ public class MemberDto {
         String password;
         String phone;
         LocalDateTime regDt;
+        LocalDateTime udtDt;
+
+
         boolean emailAuthYn;
         String emailAuthKey;
         LocalDateTime emailAuthDt;
@@ -45,6 +49,7 @@ public class MemberDto {
                         .phone(member.getPhone())
 //                        .password(member.getPassword())
                         .regDt(member.getRegDt())
+                        .udtDt(member.getUdtDt())
                         .emailAuthYn(member.isEmailAuthYn())
                         .emailAuthDt(member.getEmailAuthDt())
                         .emailAuthKey(member.getEmailAuthKey())
@@ -55,5 +60,18 @@ public class MemberDto {
                         .build();
 
         }
+
+        public String getRegDtText(){
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+                return regDt != null ? regDt.format(formatter) : "";
+        }
+
+        public String getUdtDtText(){
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+                return regDt != null ? regDt.format(formatter) : "";
+        }
+
 
 }

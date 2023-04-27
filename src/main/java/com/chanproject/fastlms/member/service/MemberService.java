@@ -60,6 +60,12 @@ public interface MemberService extends UserDetailsService {
     boolean updatePassword(String userId, String password);
 
     /**
+     * 회원정보 수정
+     */
+
+    ServiceResult updateMember(MemberInput parameter);
+
+    /**
      *  회원 정보 페이지내 비밀번호 변경 기능
      */
     ServiceResult updateMemberPassword(MemberInput parameter);
