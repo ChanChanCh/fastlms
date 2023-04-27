@@ -34,4 +34,9 @@ public class Member implements MemberCode {
     private boolean adminYn;
 
     private String userStatus; // 이용가능과 정지상태 구분
+
+    private String  zipcode;
+    private String  addr;
+    private String addrDetail;
+
 }
