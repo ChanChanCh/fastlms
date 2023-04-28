@@ -8,6 +8,7 @@ import com.chanproject.fastlms.course.service.TakeCourseService;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.model.ResetPasswordInput;
 import com.chanproject.fastlms.member.service.MemberService;
+import com.chanproject.fastlms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -180,5 +181,27 @@ public class MemberController {
     }
 
 
+    @GetMapping("/member/withdraw")
+    public String memberWithdraw(Model model) {
+
+
+        return "member/withdraw";
+    }
+
+    @PostMapping("/member/withdraw")
+    public String memberWithdrawSubmit(Model model
+            , MemberInput parameter
+            , Principal principal) {
+
+        String userId = principal.getName();
+
+        ServiceResult result = memberService.withdraw(userId, parameter.getPassword());
+        if(!result.isResult()){
+            model.addAttribute("message",result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/logout";
+    }
 
 }
