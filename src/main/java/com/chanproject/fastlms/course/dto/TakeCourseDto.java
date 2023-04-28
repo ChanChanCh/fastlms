@@ -1,6 +1,7 @@
 package com.chanproject.fastlms.course.dto;
 
 
+import com.chanproject.fastlms.course.entity.TakeCourse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +36,18 @@ public class TakeCourseDto {
 
     long totalCount;
     long seq;
+
+    public static TakeCourseDto of(TakeCourse x) {
+
+        return TakeCourseDto.builder()
+                .id(x.getId())
+                .courseId(x.getCourseId())
+                .userId(x.getUserId())
+                .payPrice(x.getPayPrice())
+                .status(x.getStatus())
+                .regDt(x.getRegDt())
+                .build();
+    }
 
     public String getRegDtText(){
 

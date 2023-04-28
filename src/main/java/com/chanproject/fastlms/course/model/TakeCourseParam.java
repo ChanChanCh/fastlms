@@ -6,9 +6,11 @@ import lombok.Data;
 @Data
 public class TakeCourseParam extends CommonParam {
 
-    long id; // course.id
-    long categoryId;
+    long id;
     String status;
+
+    String userId;
+
 
 
 }

@@ -1,7 +1,10 @@
 package com.chanproject.fastlms.member.controller;
 
 import com.chanproject.fastlms.admin.dto.MemberDto;
+import com.chanproject.fastlms.course.dto.TakeCourseDto;
 import com.chanproject.fastlms.course.model.ServiceResult;
+import com.chanproject.fastlms.course.repository.TakeCourseRepository;
+import com.chanproject.fastlms.course.service.TakeCourseService;
 import com.chanproject.fastlms.member.model.MemberInput;
 import com.chanproject.fastlms.member.model.ResetPasswordInput;
 import com.chanproject.fastlms.member.service.MemberService;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -19,6 +23,7 @@ public class MemberController {
 
 
     private final MemberService memberService;
+    private final TakeCourseService takeCourseService;
 
     // get과post 둘다 받을수있또록 RequesetMapping를 사용
     @RequestMapping("/member/login")
@@ -136,17 +141,6 @@ public class MemberController {
         return "redirect:/member/info";
     }
 
-    @GetMapping("/member/takecourse")
-    public String memberTakeCourse(Model model, Principal principal) {
-
-        String userId = principal.getName();
-        MemberDto detail = memberService.detail(userId);
-
-        model.addAttribute("detail", detail);
-
-        return "member/takecourse";
-    }
-
     @GetMapping("/member/reset/password")
     public String resetPassword(Model model, HttpServletRequest request){
 
@@ -173,6 +167,18 @@ public class MemberController {
 
         return "member/reset_password_result";
     }
+
+    @GetMapping("/member/takecourse")
+    public String memberTakeCourse(Model model, Principal principal) {
+
+        String userId = principal.getName();
+        List<TakeCourseDto> list =  takeCourseService.myCourse(userId);
+
+        model.addAttribute("list", list);
+
+        return "member/takecourse";
+    }
+
 
 
 }
