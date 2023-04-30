@@ -9,7 +9,7 @@ public class ServiceResult {
     String message;
 
     public ServiceResult() {
-
+        result= true;
     }
 
     public ServiceResult(boolean result, String message) {

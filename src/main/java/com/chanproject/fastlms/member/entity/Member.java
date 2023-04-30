@@ -21,6 +21,7 @@ public class Member implements MemberCode {
     private String password;
     private String phone;
     private LocalDateTime regDt;
+    private LocalDateTime udtDt; // 회원정보 수정일
 
     private boolean emailAuthYn;
     private String emailAuthKey;
@@ -33,4 +34,9 @@ public class Member implements MemberCode {
     private boolean adminYn;
 
     private String userStatus; // 이용가능과 정지상태 구분
+
+    private String  zipcode;
+    private String  addr;
+    private String addrDetail;
+
 }
