@@ -3,7 +3,7 @@
 
 USE : Spring, JPA, JavaScript(jquery), Thymeleaf, SQL
 
-Goal : 이전 회사에서 퍼블리싱하였던 마지막작품을 서버를 구축하여 기능까지 완성시켜본다 
+Goal : 이전 회사에서 퍼블리싱하였던 LMS 홈페이지에 필요했던 기능들을 서버를 구축하여 구현시켜본다 
 
 ## admin
 ### 공통
