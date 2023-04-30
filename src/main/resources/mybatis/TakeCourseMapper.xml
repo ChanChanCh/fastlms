@@ -32,5 +32,16 @@
         limit #{pageStart}, #{pageEnd}
     </select>
 
+    <!-- userId에 해당하는 수강신청 정보 -->
+    <select id="selectListMyCourse" resultType="com.chanproject.fastlms.course.dto.TakeCourseDto">
+        select tc.*
+            , c.subject
+        from take_course tc
+            join course c on tc.course_id = c.id
+        where tc.user_id = #{userId}
+        order by reg_dt desc
+
+    </select>
+
 
 </mapper>
