@@ -4,13 +4,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chanproject.fastlms.course.mapper.TakeCourseMapper">
 
+
+
+
     <sql id="selectListWhere">
+        <!--    searchCourseId    -->
+        <if test="searchCourseId > 0">
+            and c.id = #{searchCourseId}
+        </if>
+
     </sql>
 
     <select id="selectListCount" resultType="long">
 
         select count(*)
-        from take_course
+        from take_course tc
+            join course c on tc.course_id = c.id
+            join member m on tc.user_id = m.user_id
         where 1 = 1
             <include refid="selectListWhere"/>
 

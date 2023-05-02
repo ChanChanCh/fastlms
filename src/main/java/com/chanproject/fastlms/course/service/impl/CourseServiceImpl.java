@@ -202,4 +202,12 @@ public class CourseServiceImpl implements CourseService {
 
         return result;
     }
+
+    @Override
+    public List<CourseDto> listAll() {
+
+        List<Course> courseList = courseRepository.findAll();
+        return CourseDto.of(courseList);
+
+    }
 }
