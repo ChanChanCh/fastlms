@@ -40,4 +40,7 @@ public class Course {
     LocalDateTime udtDt; // 수정날짜
 
 
+    String filename;
+
+
 }
