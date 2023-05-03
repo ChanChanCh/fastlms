@@ -21,6 +21,7 @@ public class CourseInput {
 
     // ADD
     String filename;
+    String urlFilename;
 
 
 

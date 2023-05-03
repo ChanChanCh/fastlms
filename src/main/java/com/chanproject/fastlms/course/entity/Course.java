@@ -41,6 +41,7 @@ public class Course {
 
 
     String filename;
+    String urlFilename;
 
 
 }

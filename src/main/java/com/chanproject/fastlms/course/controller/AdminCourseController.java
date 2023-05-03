@@ -81,15 +81,16 @@ public class AdminCourseController extends BaseController{
     }
 
 
-    String getNewSaveFile(String basePath, String originalFilename){
+    private String[] getNewSaveFile(String baseLocalPath, String baseUrlPath,String originalFilename){
 
         LocalDate now = LocalDate.now();
 
         String[] dirs={
-                String.format("%s/%d/", basePath, now.getYear()),
-                String.format("%s/%d/%02d/", basePath, now.getYear(), now.getMonthValue()),
-                String.format("%s/%d/%02d/%02d", basePath, now.getYear(), now.getMonthValue(), now.getDayOfMonth())};
+                String.format("%s/%d/", baseLocalPath, now.getYear()),
+                String.format("%s/%d/%02d/", baseLocalPath, now.getYear(), now.getMonthValue()),
+                String.format("%s/%d/%02d/%02d/", baseLocalPath, now.getYear(), now.getMonthValue(), now.getDayOfMonth())};
 
+        String urlDir = String.format("%s/%d/%02d/%02d/", baseUrlPath, now.getYear(), now.getMonthValue(), now.getDayOfMonth());
 
         for(String dir : dirs){
             File file = new File(dir);
@@ -107,12 +108,13 @@ public class AdminCourseController extends BaseController{
         }
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         String newFilename = String.format("%s%s", dirs[2], uuid);
+        String newUrlFilename = String.format("%s%s", urlDir, uuid);
         if(fileExtension.length() > 0){
             newFilename += "." + fileExtension;
+            newUrlFilename += "." + fileExtension;
         }
 
-        return newFilename;
-
+        return new String[] {newFilename, newUrlFilename};
     }
 
     @PostMapping(value = {"/admin/course/add.do", "/admin/course/edit.do"})
@@ -121,11 +123,20 @@ public class AdminCourseController extends BaseController{
             , CourseInput parameter){
 
         String saveFilename = "";
+        String urlFilename = "";
 
         if(file != null) {
             String originalFilename = file.getOriginalFilename();
-            String basePath = "C:\\Users\\user\\IdeaProjects\\fastlms\\files";
-            saveFilename = getNewSaveFile(basePath, originalFilename);
+
+            String baseLocalPath = "C:\\Users\\user\\IdeaProjects\\fastlms\\files";
+            String baseUrlPath = "/files";
+
+            String[] arrFilename = getNewSaveFile(baseLocalPath, baseUrlPath, originalFilename);
+
+            saveFilename = arrFilename[0];
+            urlFilename = arrFilename[1];
+
+
 
             try {
                 File newFile = new File(saveFilename);
@@ -137,6 +148,7 @@ public class AdminCourseController extends BaseController{
         }
 
         parameter.setFilename(saveFilename);
+        parameter.setUrlFilename(urlFilename);
 
         boolean editMode = request.getRequestURI().contains("/edit.do");
 
